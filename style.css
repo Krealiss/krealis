@@ -1,0 +1,450 @@
+﻿:root {
+    --bg: #222;
+    --bg-alt: #1c1c1c;
+    --header-bg: #111;
+    --text: #eee;
+    --muted: #aaa;
+    --accent: #ff9800;
+    --accent-dark: #ffa733;
+    --card-bg: #2a2a2a;
+    --shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+
+/* Скидання */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+/* Краще керування фокусом для клавіатури */
+:focus {
+    outline: none;
+}
+
+:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 6px;
+}
+
+/* Скрол */
+.scroll-container {
+    height: 100vh;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--header-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #444, #666);
+    border-radius: 6px;
+}
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(180deg, #666, #888);
+    }
+
+/* Хедер */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 28px;
+    background: var(--header-bg);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.6);
+}
+
+    header .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    header nav a {
+        margin-left: 20px;
+        color: var(--text);
+        font-weight: 500;
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+
+        header nav a:hover {
+            color: var(--accent);
+        }
+#hero {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    padding: 60px 10%;
+    min-height: 100vh;
+    background: var(--bg);
+}
+
+
+.hero-text {
+    flex: 1;
+}
+
+    .hero-text h1 {
+        font-size: 3rem;
+        margin-bottom: 10px;
+        color: #fff;
+    }
+
+    .hero-text h3 {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+        color: var(--accent);
+    }
+
+    .hero-text p {
+        max-width: 500px;
+        margin-bottom: 25px;
+    }
+
+.hero-img {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+    .hero-img img {
+        width: 280px;
+        border-radius: 20px;
+        box-shadow: var(--shadow);
+        transition: transform 0.3s;
+    }
+
+        .hero-img img:hover {
+            transform: scale(1.05);
+        }
+
+
+/* 🧱 Проєкти */
+#projects {
+    background: var(--bg-alt);
+    padding: 80px 10%;
+    text-align: center;
+}
+
+    #projects h2 {
+        color: var(--accent);
+        margin-bottom: 50px;
+        font-size: 2rem;
+        text-transform: uppercase;
+        border-left: none;
+    }
+
+/* Сітка проєктів */
+.projects-grid {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+/* Картка */
+.project-card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    overflow: hidden;
+    text-decoration: none;
+    width: 320px;
+    box-shadow: var(--shadow);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    cursor: pointer;
+}
+
+    .project-card:hover {
+        transform: scale(1.06);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.7);
+    }
+
+    .project-card h3 {
+        background: var(--accent);
+        color: #111;
+        margin: 0;
+        padding: 5px;
+        font-size: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .project-card img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.5s ease;
+    }
+
+    .project-card:hover img {
+        transform: scale(1.05);
+    }
+
+    /* Для картки Soon */
+    .project-card.soon h3 {
+        background: #444;
+        color: #ccc;
+    }
+
+    .project-card.soon img {
+        opacity: 0.6;
+        filter: grayscale(60%);
+        transition: opacity 0.4s ease, filter 0.4s ease;
+    }
+
+    .project-card.soon:hover img {
+        opacity: 0.8;
+        filter: grayscale(30%);
+    }
+
+/* Секції */
+section {
+    min-height: 100vh;
+    padding: 60px 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-bottom: 1px solid #333;
+    scroll-snap-align: start;
+    background: var(--bg);
+    opacity: 0;
+    transform: translateY(40px);
+    animation: fadeInUp 1s ease forwards;
+    animation-timeline: view();
+    animation-range: entry 0% cover 40%;
+}
+
+    section:nth-child(even) {
+        background: var(--bg-alt);
+    }
+
+    section h2 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+        color: var(--accent);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+/*        border-left: 5px solid var(--accent);*/
+        padding-left: 10px;
+    }
+
+/* Текст */
+p, li, td, th {
+    font-size: 1.05rem;
+}
+
+ul {
+    padding-left: 20px;
+}
+
+strong {
+    color: var(--accent);
+}
+
+/* Таблиця */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    background: var(--card-bg);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+    .table th, .table td {
+        padding: 10px 12px;
+        border: 1px solid #444;
+        text-align: left;
+    }
+
+    .table th {
+        background: #333;
+    }
+
+    .table tr:hover {
+        background: rgba(255,255,255,0.05);
+    }
+
+/* Кнопка */
+.button {
+    display: inline-block;
+    background: var(--accent);
+    color: #111;
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s, transform 0.2s;
+}
+
+    .button:hover {
+        background: var(--accent-dark);
+        transform: translateY(-2px);
+    }
+
+/* 📨 Контакти */
+#contacts {
+    background: var(--header-bg);
+    text-align: center;
+    padding: 80px 10% 60px;
+}
+
+    #contacts h2 {
+        color: var(--accent);
+        margin-bottom: 30px;
+        font-size: 2rem;
+        text-transform: uppercase;
+    }
+
+.contact-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.contact-btn {
+    width: 70px;
+    height: 70px;
+    background: var(--card-bg);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+    .contact-btn:hover {
+        transform: scale(1.15);
+        background: var(--accent);
+    }
+
+    .contact-btn img {
+        width: 36px;
+        height: 36px;
+        filter: invert(1);
+        transition: filter 0.3s ease;
+    }
+
+    .contact-btn:hover img {
+        filter: invert(0);
+    }
+
+/* Футер */
+.footer {
+    text-align: center;
+    width: 100%;
+    padding: 20px 10%;
+    background: var(--header-bg);
+    box-shadow: 0 -2px 6px rgba(0,0,0,0.5);
+    margin-top: 40px;
+    font-size: 0.9rem;
+    color: var(--muted);
+}
+
+
+/* Адаптив */
+@media(max-width:800px) {
+    #hero {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-img img {
+        width: 200px;
+    }
+}
+
+@media(max-width:700px) {
+    header {
+        flex-direction: column;
+        gap: 8px;
+        align-items: flex-start;
+    }
+
+    .flex {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .profile-pic {
+        width: 160px;
+    }
+}
+
+/* Анімація */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Зменшений рух для користувачів, які цього бажають */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Утиліти для сторінки About */
+.profile-pic {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: var(--shadow);
+}
+
+.flex {
+    display: flex;
+    gap: 16px;
+}
+
+.gallery {
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.thumb {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+}
